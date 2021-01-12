@@ -24,10 +24,10 @@ class ArchivesSpaceService < Sinatra::Base
     if is_valid_year?(year)
       dataset = CrudHelpers.scoped_dataset(Accession, {}).map{|rec| rec[:id_0]}.delete_if{|x| !x.start_with?(params[:year])}
       if dataset.nil? || dataset.empty?
-        next_id = year.concat(".001")
+        next_id = year.concat(".1")
       else
         id = (dataset.max.sub("#{year}.", "").to_i)+1
-        next_id = year.concat(".").concat(id.to_s.rjust(3, '0'))
+        next_id = year.concat(".").concat(id.to_s)
       end
       json['id'] = next_id
     else
