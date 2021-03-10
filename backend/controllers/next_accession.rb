@@ -26,7 +26,7 @@ class ArchivesSpaceService < Sinatra::Base
       if dataset.nil? || dataset.empty?
         next_id = year.concat(".1")
       else
-        existing_toplevels = dataset.map(|x| x.sub("#{year}.", "").to_i)
+        existing_toplevels = dataset.map{|x| x.sub("#{year}.", "").to_i}
         id = (existing_toplevels.max)+1
         next_id = year.concat(".").concat(id.to_s)
       end
